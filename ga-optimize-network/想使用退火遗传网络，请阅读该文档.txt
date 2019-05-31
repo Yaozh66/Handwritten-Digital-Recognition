@@ -1,5 +1,7 @@
-1.edit ga，在ga.m中差不多最后找到galincon，在galincon中大概62行位置，打开stepGA,
-2.将其中源码替换成以下代码
+以下步骤务必按顺序来
+1.先运行main.m遗传算法降维以及前面部分的代码，以确保在遗传算法降维时不使用退火算法
+2.edit ga，在ga.m中差不多最后找到galincon，在galincon中大概62行位置，打开stepGA,
+3.将其中源码替换成以下代码
 function [nextScore,nextPopulation,state] = stepGA(thisScore,thisPopulation,options,state,GenomeLength,FitnessFcn)
 %STEPGA Moves the genetic algorithm forward by one generation
 %   This function is private to GA.
@@ -53,8 +55,8 @@ nextScore = nextScore(:);
 
 %模拟退火算法的配置，优化10代，绘出适应度的收敛曲线
 sa_options = saoptimset('PlotFcn',@saplotbestf,'MaxIter',10);
-lb=repmat(-3,length(nextPopulation),3);
-ub=repmat(3,length(nextPopulation),3);
+lb=repmat(-3,length(nextPopulation),1);
+ub=repmat(3,length(nextPopulation),1);
 for i=1:size(nextPopulation,1)
     obj=@(x) objfun1(x,nextScore(i));
     nextPopulation(i,:)=simulannealbnd(obj,nextPopulation(i,:),lb,ub,sa_options);%对每一个个体执行退火算法，适应度函数直接取为遗传算法计算
@@ -70,11 +72,7 @@ end
 nextScore = nextScore(:);
 state.FunEval = state.FunEval + size(nextScore,1);
 
-3.在目录下添加objfun1.m，在其中加入：
-   function y = objfun1(x,nextScore)
-    y=nextScore;%返回遗传算法计算的分数
-end
-
-4.此后，调用ga函数即是退火遗传算法，如果不要，注释掉即可。
-                                 by yaozh(2019.5.28)
+4.运行遗传算法降维之后的部分，以便使用的是遗传退火网络优化的网络
+4.此后，调用ga函数即是退火遗传算法，如果不要，注释掉模拟退火算法相应的部分即可即可。
+                                 by yaozh(2019.5.31)
    

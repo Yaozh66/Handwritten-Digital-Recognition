@@ -50,9 +50,9 @@ net.trainFcn='trainrp';
 ann_data=ga_reddim(ann_data,ann_label,net);
 %% 先对神经网络进行优化
 %计算输入层，隐藏层以及输出层个数
-inputnum=size(train_data,1);
+inputnum=size(ann_data,1);
 hiddennum=layer;
-outputnum=size(train_label,1);
+outputnum=size(ann_label,1);
 
 %先对网络进行遗传算法，根据分类的误差优化神经网络的权值以及阈值
 numsum=inputnum*hiddennum+hiddennum+hiddennum*outputnum+outputnum;%待优化变量个数
@@ -65,14 +65,14 @@ tic%计时开始
 %遗传算法采用实数编码法，采用随机均匀分布选择法，加权平均交叉法，自适应变异法，使用并行计算加速遗传算法
 popsize=50;
 numgen=50;
-[net,tr]=train(net,train_data,train_label,'useGPU','yes');
+[net,tr]=train(net,ann_data,ann_label,'useGPU','yes');
 w1=net.iw{1,1};
 w2=net.lw{2,1};
 b1=net.b{1};
 b2=net.b{2};
 init=[w1(:)',b1(:)',w2(:)',b2(:)'];
 initialmat=repmat(init,popsize,1);
-VFitnessFunction = @(x) fun2(x,inputnum,hiddennum,outputnum,train_data,train_label,net);
+VFitnessFunction = @(x) fun2(x,inputnum,hiddennum,outputnum,ann_data,ann_label,net);
 options=optimoptions(@ga,'PopulationSize',popsize,'MaxGenerations',numgen...
     ,'InitialPopulationMatrix',initialmat,'SelectionFcn',@selectionstochunif,'PlotFcn',{@gaplotbestf...
  ,@gaplotdistance}   ,'CrossoverFcn',@crossoverintermediate,'MutationFcn', @mutationadaptfeasible,...
