@@ -1,4 +1,5 @@
 %% 读取图像并使用粗网格法提取特征，然后保存为feature.mat，以后直接加载即可
+%by 中国 华南理工大学 姚瞻楠
 clc;
 clearvars;
 close all;
