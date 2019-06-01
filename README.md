@@ -1,7 +1,7 @@
 # Handwritten-Digital-Recognition
 by MATLAB R2019a
 
-by yaozh(2019-5-31)
+by 中国 华南理工大学 姚瞻楠(2019-5-31)
 
 2019Ordinary文件夹表示使用普通的bp神经网络，ga-optimize-network使用优化过的神经网络
 
