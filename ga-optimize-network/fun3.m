@@ -1,7 +1,5 @@
 function error= fun3(x,inputnum,hiddennum,outputnum,inputn,outputn)
-%FUN1 此处显示有关此函数的摘要
-%   此处显示详细说明
-%该函数用来计算适应度值
+%该函数用来计算模拟退火算法的适应度值
 %x          input     个体
 %inputnum   input     输入层节点数
 %outputnum  input     隐含层节点数
@@ -29,6 +27,6 @@ end
 label=u';
 error=label-out;
 accuracy=size(find(error==0),2)/size(label,2);
-error=100*(1-accuracy);%适应度函数取为
+error=100*(1-accuracy);%适应度函数取为预测出来的错误率
 end
 
