@@ -78,8 +78,8 @@ options=optimoptions(@ga,'PopulationSize',popsize,'MaxGenerations',numgen...
     ,'InitialPopulationMatrix',initialmat,'SelectionFcn',@selectionstochunif,'PlotFcn',{@gaplotbestf...
  ,@gaplotdistance}   ,'CrossoverFcn',@crossoverintermediate,'MutationFcn', @mutationadaptfeasible,...
  'UseParallel',true);
-x=ga(VFitnessFunction,numsum,[],[],[],[],lb,ub,[],[],options);
-toc
+x=ga_sa(VFitnessFunction,numsum,[],[],[],[],lb,ub,[],[],options,ann_data,ann_label,layer);
+
 %% BP神经网络创建，训练和测试
 %先利用已经优化过的参数对神经网络进行赋值
 w1=x(1:inputnum*hiddennum);
@@ -112,4 +112,4 @@ figure,plotroc(ann_label(:,tInd),tstOutputs)
 [c,cm] = confusion(ann_label(:,tInd),tstOutputs);
 fprintf('Percentage Correct Classification   : %f%%\n', 100*(1-c));
 fprintf('Percentage Incorrect Classification : %f%%\n', 100*c)
-
+toc
