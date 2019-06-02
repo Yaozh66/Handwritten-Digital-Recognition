@@ -1,4 +1,4 @@
-function [nextScore,nextPopulation,state] = stepGA(thisScore,thisPopulation,options,state,GenomeLength,FitnessFcn,ann_data,ann_label,layer)
+function [nextScore,nextPopulation,state] = stepGASA(thisScore,thisPopulation,options,state,GenomeLength,FitnessFcn,ann_data,ann_label,layer)
 %STEPGA Moves the genetic algorithm forward by one generation
 %   This function is private to GA.
 
